@@ -50,7 +50,7 @@ bool Input::Video::initialize(size_t width, size_t height)
   return isInit();
 }
 
-bool Input::Video::read(cv::Mat* frame)
+bool Input::Video::read(cv::Mat* frame, std::string* frameId, uint32_t* sec, uint32_t* nsec)
 {
   if (!isInit())
   {

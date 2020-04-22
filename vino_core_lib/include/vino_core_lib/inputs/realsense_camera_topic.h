@@ -51,7 +51,7 @@ class RealSenseCameraTopic : public BaseInputDevice
   {
     return true;
   };
-  bool read(cv::Mat* frame) override;
+  bool read(cv::Mat* frame, std::string* frameId, uint32_t* sec, uint32_t* nsec) override;
   void config() override;
 
  private:

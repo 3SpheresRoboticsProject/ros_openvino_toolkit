@@ -45,7 +45,7 @@ bool Input::Image::initialize()
   return isInit();
 }
 
-bool Input::Image::read(cv::Mat* frame)
+bool Input::Image::read(cv::Mat* frame, std::string* frameId, uint32_t* sec, uint32_t* nsec)
 {
   if (!isInit())
   {

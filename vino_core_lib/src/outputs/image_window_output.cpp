@@ -367,7 +367,7 @@ void Outputs::ImageWindowOutput::decorateFrame()
 
   outputs_.clear();
 }
-void Outputs::ImageWindowOutput::handleOutput()
+void Outputs::ImageWindowOutput::handleOutput(std::string frameId, uint32_t sec, uint32_t nsec)
 {
   cv::namedWindow(window_name_, cv::WINDOW_AUTOSIZE);
   decorateFrame();

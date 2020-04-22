@@ -60,7 +60,7 @@ class Video : public BaseInputDevice
    * @brief Read next frame, and give the value to argument frame.
    * @return Whether the next frame is successfully read.
    */
-  bool read(cv::Mat* frame) override;
+  bool read(cv::Mat* frame, std::string* frameId, uint32_t* sec, uint32_t* nsec) override;
   void config() override;
 
  private:
