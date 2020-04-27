@@ -100,13 +100,6 @@ public:
    */
   void accept(const std::vector<vino_core_lib::HumanPoseResult> &) override;
 
- // TODO remove comment.
- /**
-   * @brief Merge mask for image window ouput
-   * the object segmentation result.
-   * @param[in] An object segmentation result objetc.
-   */
-
 private:
   std_msgs::Header getHeader(std::string, uint32_t, uint32_t);
   ros::NodeHandle nh_;

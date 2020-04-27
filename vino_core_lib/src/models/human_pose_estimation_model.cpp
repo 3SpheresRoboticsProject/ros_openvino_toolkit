@@ -1,8 +1,28 @@
-// TODO add license
-
 /*
-Model URL: https://docs.openvinotoolkit.org/2019_R3.1/_models_intel_human_pose_estimation_0001_description_human_pose_estimation_0001.html
-*/
+ * Copyright (c) 2018 Intel Corporation
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * @brief a source file with declaration of HumanPoseEstimationModel.
+ * @file human_pose_estimation_model.cpp
+ * 
+ * Reference code provided by open_model_zoo at:
+ * https://github.com/opencv/open_model_zoo/tree/master/demos/human_pose_estimation_demo
+ * and
+ * https://docs.openvinotoolkit.org/2019_R3.1/_models_intel_human_pose_estimation_0001_description_human_pose_estimation_0001.html
+ */
 
 #include <string>
 #include <sstream>
@@ -25,8 +45,8 @@ void Models::HumanPoseEstimationModel::setLayerProperty(
   InferenceEngine::InputsDataMap input_info_map(
   net_reader->getNetwork().getInputsInfo());
   InferenceEngine::InputInfo::Ptr input_info = input_info_map.begin()->second;
-  input_info->setPrecision(InferenceEngine::Precision::U8); // It's an image
-  input_info->setLayout(InferenceEngine::Layout::NCHW);     // No idea.
+  input_info->setPrecision(InferenceEngine::Precision::U8); 
+  input_info->setLayout(InferenceEngine::Layout::NCHW);
   // set output property
   InferenceEngine::OutputsDataMap output_info_map(
       net_reader->getNetwork().getOutputsInfo());

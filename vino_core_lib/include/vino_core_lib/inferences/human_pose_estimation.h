@@ -1,8 +1,25 @@
-// TODO add license
+/*
+ * Copyright (c) 2020 Intel Corporation
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 /**
- * @brief A header file with declaration for AgeGenderDetection Class
+ * @brief A header file with declaration for HumanPoseEstimation Class
  * @file human_pose_estimation.h
+ * 
+ * Reference code provided by open_model_zoo at:
+ * https://github.com/opencv/open_model_zoo/tree/master/demos/human_pose_estimation_demo
  */
 #ifndef VINO_CORE_LIB_INFERENCES_HUMAN_POSE_ESTIMATION_H
 #define VINO_CORE_LIB_INFERENCES_HUMAN_POSE_ESTIMATION_H
@@ -42,8 +59,8 @@ class HumanPoseResult : public Result
   explicit HumanPoseResult(const cv::Rect& location);
   HumanPoseResult(
     const cv::Rect& location,
-    const std::vector<HumanPoseKeypoint>& keypoints, // = std::vector<cv::Point2f>(),
-    const float& score); // = 0);
+    const std::vector<HumanPoseKeypoint>& keypoints,
+    const float& score);
   
   // Following similar structure of vino_core_lib/inferences/object_detection.h
   // and human_pose_estimation_demo/src/human_pose_estimator.h

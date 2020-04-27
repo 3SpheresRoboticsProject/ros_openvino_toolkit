@@ -1,14 +1,32 @@
-// Copyright (C) 2018-2019 Intel Corporation
-// SPDX-License-Identifier: Apache-2.0
-//
+/*
+ * Copyright (c) 2020 Intel Corporation
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
-#pragma once
+/**
+ * @brief A header file with functions for interpreting peaks in the heatmap.
+ * @file peak.h
+ * 
+ * Reference code provided by open_model_zoo at:
+ * https://github.com/opencv/open_model_zoo/tree/master/demos/human_pose_estimation_demo
+ */ 
+
+#ifndef VINO_CORE_LIB_INFERENCES_HUMAN_POSE_ESTIMATION_PEAK_H
+#define VINO_CORE_LIB_INFERENCES_HUMAN_POSE_ESTIMATION_PEAK_H
 
 #include <vector>
-
 #include <opencv2/core/core.hpp>
-
-// #include "human_pose.hpp"
 #include "vino_core_lib/inferences/human_pose_estimation.h"
 
 namespace human_pose_estimation
@@ -85,3 +103,5 @@ private:
 };
 
 } // namespace human_pose_estimation
+
+#endif // VINO_CORE_LIB_INFERENCES_HUMAN_POSE_ESTIMATION_PEAK_H

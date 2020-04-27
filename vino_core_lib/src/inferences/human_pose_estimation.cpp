@@ -1,11 +1,26 @@
-// TODO add license
+/*
+ * Copyright (c) 2018 Intel Corporation
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 /**
- * @brief a header file with declaration of HumanPoseResult class //TODO update
+ * @brief a source file with declaration of HumanPoseResult and 
+ * HumanPoseEstimation classes
  * @file human_pose_estimation.cpp
  * 
- * This file was mostly based on age_gender_detection.cpp. It also uses the code
- * from object_detection.cpp.
+ * Reference code provided by open_model_zoo at:
+ * https://github.com/opencv/open_model_zoo/tree/master/demos/human_pose_estimation_demo
  */
 
 #include <memory>
