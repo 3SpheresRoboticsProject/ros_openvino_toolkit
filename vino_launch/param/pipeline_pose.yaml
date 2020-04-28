@@ -1,6 +1,6 @@
 Pipelines:
 - name: people
-  inputs: [RealSenseCamera]
+  inputs: [RealSenseCameraTopic]
   infers:
     - name: HumanPoseEstimation
       model: /opt/openvino_toolkit/open_model_zoo/tools/downloader/intel/human-pose-estimation-0001/FP16/human-pose-estimation-0001.xml
@@ -14,7 +14,7 @@ Pipelines:
       min_subset_score: 0.2
   outputs: [ImageWindow, RosTopic, RViz]
   connects:
-    - left: RealSenseCamera
+    - left: RealSenseCameraTopic
       right: [HumanPoseEstimation]
     - left: HumanPoseEstimation
       right: [ImageWindow, RosTopic, RViz]
