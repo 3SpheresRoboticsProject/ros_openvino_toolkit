@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Intel Corporation
+ * Copyright (c) 2020 Intel Corporation
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -77,7 +77,6 @@ void vino_core_lib::HumanPoseEstimation::loadNetwork(
 bool vino_core_lib::HumanPoseEstimation::enqueue(
     const cv::Mat& frame, const cv::Rect& input_frame_loc)
 {
-  // object_detection.cpp
   if (width_ == 0 && height_ == 0)
   {
     width_ = frame.cols;
@@ -114,7 +113,6 @@ bool vino_core_lib::HumanPoseEstimation::fetchResults()
   CV_Assert(heatmapBlob->getTensorDesc().getDims()[1] == keypointsNumber_ + 1);
   InferenceEngine::SizeVector heatMapDims =
           heatmapBlob->getTensorDesc().getDims();
-  //std::vector<Result> poses = postprocess(
   results_ = postprocess(
           heatmapBlob->buffer(),
           heatMapDims[2] * heatMapDims[3],
@@ -270,7 +268,6 @@ void vino_core_lib::HumanPoseEstimation::correctROI(
       if (y > yMax) yMax = y;
       if (y < yMin) yMin = y;
     }
-    // slog::info << "rect at: (" << xMin << ", " << yMin << "), (" << xMax << ", " << yMax << ")" << slog::endl;
     cv::Rect newLocation = cv::Rect(xMin, yMin, xMax - xMin, yMax - yMin);
     pose.setLocation(newLocation);
   }

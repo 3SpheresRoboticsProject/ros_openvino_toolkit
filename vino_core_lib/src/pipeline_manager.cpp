@@ -331,8 +331,6 @@ std::shared_ptr<vino_core_lib::BaseInference>
 PipelineManager::createHumanPoseEstimation(
   const Params::ParamManager::InferenceParams & infer)
 {
-  // Following createObjectDetection and createFaceDetection
-  // 1 input, 2 outputs, 1 batch
   auto human_estimation_model =
     std::make_shared<Models::HumanPoseEstimationModel>(infer.model, 1, 2, 1);
   human_estimation_model->modelInit();

@@ -1,10 +1,14 @@
-# Introduction
+# YAML Configuration Guide
+
+## Introduction
 
 The contents in .yaml config file should be well structured and follow the supported rules and entity names.
 
-# Sample
-## [pipeline_people.yaml](https://github.com/intel/ros_openvino_toolkit/blob/devel/sample/param/pipeline_people.yaml)
-```bash
+## Sample
+
+### [pipeline_people.yaml](https://github.com/intel/ros_openvino_toolkit/blob/devel/sample/param/pipeline_people.yaml)
+
+```yaml
 Pipelines:
 - name: people
   inputs: [StandardCamera]
@@ -45,12 +49,15 @@ Pipelines:
 
 Common:
 ```
+
 ## Interface Description
 
 ### name
+
 The name of this pipeline, its value can be any value other than empty.
 
 ### inputs
+
 **Note**:The value of the input parametar can only have one.</br>
 Currently, options for inputs are:
 
@@ -63,29 +70,35 @@ Currently, options for inputs are:
 |Video| Any video file which can be parsed by openCV.|
 
 ### input_path
+
 When input is Image or Video, need to use input_path to specify the path of the input file.
 
 ### infers
+
 The Inference Engine is a set of C++ classes to provides an API to read the Intermediate Representation, set the input and output formats, and execute the model on devices.
 
 #### name
+
 The name of the inference engine. Currently, the inference feature list is supported:
 
 |Inference|Description|
 |-----------------------|------------------------------------------------------------------|
 |FaceDetection|Object Detection task applied to face recognition using a sequence of neural networks.|
 |EmotionRecognition| Emotion recognition based on detected face image.|
-|AgeGenderRecognition| Age and gener recognition based on detected face image.|
+|AgeGenderRecognition| Age and gender recognition based on detected face image.|
 |HeadPoseEstimation| Head pose estimation based on detected face image.|
 |ObjectDetection| object detection based on SSD-based trained models.|
 |VehicleDetection| Vehicle and passenger detection based on Intel models.|
 |ObjectSegmentation| object detection and segmentation.|
+|HumanPoseEstimation| Estimates the pose (skeleton) of people in a given image.|
 
 #### model
+
 The path of the model. The scheme below illustrates the typical workflow for deploying a trained deep learning model.
 ![trained deep learning model](https://github.com/intel/ros_openvino_toolkit/blob/devel/data/images/CVSDK_Flow.png "trained deep learning model")
 
 #### engine
+
 **Note**:Currently, only supports CPU and GPU.</br>
 options for target device are:
 
@@ -97,12 +110,15 @@ options for target device are:
 |Intel® Movidius™ Neural Compute Stick|
 
 #### label
+
 Currently, This parameter does not work.
 
 #### batch
+
 Enable dynamic batch size for inference engine net. 
 
 ### outputs
+
 **Note**:The value of the output parameter can be selected one or more.</br>
 Currently, options for outputs are:
 
@@ -113,7 +129,9 @@ Currently, options for outputs are:
 |RViz| display the result in rviz|
 
 ### confidence_threshold
+
 Probability threshold for detections.
 
 ### connects
+
 The topology of the pipeline, left can only have one value, right can have multiple values.

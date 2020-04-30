@@ -221,7 +221,7 @@ void Outputs::RosTopicOutput::accept(
     hp.roi.height = loc.height;
     hp.score = r.getScore();
     
-    auto p = vino_people_msgs::HumanPoseKeypoint();// geometry_msgs::Point();
+    auto p = vino_people_msgs::HumanPoseKeypoint();
     p.position.z = -1;
     for (auto kp : r.keypoints)
     {
