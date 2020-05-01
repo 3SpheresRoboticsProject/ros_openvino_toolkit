@@ -242,9 +242,9 @@ void Outputs::RosTopicOutput::accept(
   }
 }
 
-void Outputs::RosTopicOutput::handleOutput(std::string frameId, uint32_t sec, uint32_t nsec)
+void Outputs::RosTopicOutput::handleOutput()
 {
-  std_msgs::Header header = getHeader(frameId, sec, nsec);
+  std_msgs::Header header = getHeader();
   if (person_reid_msg_ptr_ != nullptr) {
     vino_people_msgs::ReidentificationStamped person_reid_msg;
     person_reid_msg.header = header;
@@ -325,25 +325,15 @@ void Outputs::RosTopicOutput::handleOutput(std::string frameId, uint32_t sec, ui
   }
 }
 
-std_msgs::Header Outputs::RosTopicOutput::getHeader(std::string frameId, uint32_t sec, uint32_t nsec)
+std_msgs::Header Outputs::RosTopicOutput::getHeader()
 {
   std_msgs::Header header;
-  if (frameId.size() == 0 || sec == 0)
-  {
-    header.frame_id = "default_camera";
+  header.frame_id = "default_camera";
 
-    std::chrono::high_resolution_clock::time_point tp =
-        std::chrono::high_resolution_clock::now();
-    int64 ns = tp.time_since_epoch().count();
-    header.stamp.sec = ns / 1000000000;
-    header.stamp.nsec = ns % 1000000000;
-  }
-  else
-  {
-    header.frame_id = frameId;
-    header.stamp.sec = sec;
-    header.stamp.nsec = nsec;
-  }
-  
+  std::chrono::high_resolution_clock::time_point tp =
+      std::chrono::high_resolution_clock::now();
+  int64 ns = tp.time_since_epoch().count();
+  header.stamp.sec = ns / 1000000000;
+  header.stamp.nsec = ns % 1000000000;
   return header;
 }

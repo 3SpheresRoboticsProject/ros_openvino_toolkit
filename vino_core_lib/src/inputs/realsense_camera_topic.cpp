@@ -45,12 +45,10 @@ bool Input::RealSenseCameraTopic::initialize()
 void Input::RealSenseCameraTopic::cb(
     const sensor_msgs::ImageConstPtr& image_msg)
 {
-  this->setFrameID(image_msg->header.frame_id);
-  this->setStamp(image_msg->header.stamp.sec, image_msg->header.stamp.nsec);
   image = cv_bridge::toCvCopy(image_msg, "bgr8")->image;
 }
 
-bool Input::RealSenseCameraTopic::read(cv::Mat* frame, std::string* frameId, uint32_t* sec, uint32_t* nsec)
+bool Input::RealSenseCameraTopic::read(cv::Mat* frame)
 {
   ros::spinOnce();
   //nothing in topics from begining
@@ -65,8 +63,6 @@ bool Input::RealSenseCameraTopic::read(cv::Mat* frame, std::string* frameId, uin
   else
   {
 	  *frame = image;
-    *frameId = this->getFrameID();
-    this->getStamp(sec, nsec);
   }
   return true;
 }

@@ -185,10 +185,7 @@ void Pipeline::runOnce()
 {
   initInferenceCounter();
 
-  std::string frameId;
-  uint32_t nsec, sec;
-
-  if (!input_device_->read(&frame_, &frameId, &sec, &nsec))
+  if (!input_device_->read(&frame_))
   {
     // throw std::logic_error("Failed to get frame from cv::VideoCapture");
     slog::warn << "Failed to get frame from input_device." << slog::endl;
@@ -220,7 +217,7 @@ void Pipeline::runOnce()
 
   for (auto& pair : name_to_output_map_)
   {
-    pair.second->handleOutput(input_device_->getFrameID(), sec, nsec);
+    pair.second->handleOutput();
   }
 }
 

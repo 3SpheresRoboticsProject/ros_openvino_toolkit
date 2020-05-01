@@ -77,12 +77,12 @@ void Outputs::RvizOutput::accept(const std::vector<vino_core_lib::HumanPoseResul
 }
  
 
-void Outputs::RvizOutput::handleOutput(std::string frameId, uint32_t sec, uint32_t nsec)
+void Outputs::RvizOutput::handleOutput()
 {
   image_window_output_->setPipeline(getPipeline());
   image_window_output_->decorateFrame();
   cv::Mat frame = image_window_output_->getFrame();
-  std_msgs::Header header = getHeader(frameId, sec, nsec);
+  std_msgs::Header header = getHeader();
   std::shared_ptr<cv_bridge::CvImage> cv_ptr =
     std::make_shared<cv_bridge::CvImage>(header, "bgr8", frame);
    sensor_msgs::Image image_msg;
@@ -91,24 +91,14 @@ void Outputs::RvizOutput::handleOutput(std::string frameId, uint32_t sec, uint32
   pub_image_.publish(image_topic_);
 }
   std::shared_ptr<sensor_msgs::Image> image_topic_;
-std_msgs::Header Outputs::RvizOutput::getHeader(std::string frameId, uint32_t sec, uint32_t nsec)
+std_msgs::Header Outputs::RvizOutput::getHeader()
 {
   std_msgs::Header header;
-  if (frameId.size() == 0 || sec == 0)
-  {
-    header.frame_id = getPipeline()->getInputDevice()->getFrameID();
+  header.frame_id = getPipeline()->getInputDevice()->getFrameID();
 
-    std::chrono::high_resolution_clock::time_point tp = std::chrono::high_resolution_clock::now();
-    int64 ns = tp.time_since_epoch().count();
-    header.stamp.sec = ns / 1000000000;
-    header.stamp.nsec = ns % 1000000000;
-  }
-  else
-  {
-    header.frame_id = frameId;
-    header.stamp.sec = sec;
-    header.stamp.nsec = nsec;
-  }
-  
+  std::chrono::high_resolution_clock::time_point tp = std::chrono::high_resolution_clock::now();
+  int64 ns = tp.time_since_epoch().count();
+  header.stamp.sec = ns / 1000000000;
+  header.stamp.nsec = ns % 1000000000;
   return header;
 }

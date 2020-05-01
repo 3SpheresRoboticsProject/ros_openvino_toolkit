@@ -56,7 +56,7 @@ class BaseInputDevice : public Ros2Handler
    * @brief Read next frame, and give the value to argument frame.
    * @return Whether the next frame is successfully read.
    */
-  virtual bool read(cv::Mat* frame, std::string* frameId, uint32_t* sec, uint32_t* nsec) = 0;
+  virtual bool read(cv::Mat* frame) = 0;
   virtual void config() = 0;  //< TODO
   virtual ~BaseInputDevice() = default;
   /**
@@ -124,25 +124,11 @@ class BaseInputDevice : public Ros2Handler
     return frame_id_;
   }
 
-  inline void setStamp(uint32_t sec, uint32_t nsec)
-  {
-    nsec_ = nsec;
-    sec_ = sec;
-  }
-
-  inline void getStamp(uint32_t *sec, uint32_t *nsec)
-  {
-    *sec = sec_;
-    *nsec = nsec_;
-  }
-
  private:
   size_t width_ = 0;
   size_t height_ = 0;
   bool is_init_ = false;
   std::string frame_id_;
-  uint32_t sec_ = 0;
-  uint32_t nsec_ = 0;
 };
 }  // namespace Input
 #endif  // VINO_CORE_LIB_INPUTS_BASE_INPUT_H
