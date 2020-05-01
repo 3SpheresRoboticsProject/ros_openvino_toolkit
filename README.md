@@ -1,7 +1,7 @@
 
 # Introduction
 
-The OpenVINO™ (Open visual inference and neural network optimization) toolkit provides a ROS-adaptered runtime framework of neural network which quickly deploys applications and solutions for vision inference. By leveraging Intel® OpenVINO™ toolkit and corresponding libraries, this runtime framework extends  workloads across Intel® hardware (including accelerators) and maximizes performance.
+The OpenVINO™ (Open visual inference and neural network optimization) toolkit provides a ROS-adapted runtime framework of neural network which quickly deploys applications and solutions for vision inference. By leveraging Intel® OpenVINO™ toolkit and corresponding libraries, this runtime framework extends  workloads across Intel® hardware (including accelerators) and maximizes performance.
 
 * Enables CNN-based deep learning inference at the edge
 * Supports heterogeneous execution across computer vision accelerators—CPU, GPU, Intel® Movidius™ Neural Compute Stick, and FPGA—using a common API
@@ -20,9 +20,9 @@ and enable easy, heterogeneous execution across Intel® platforms from edge to c
   * Unleash convolutional neural network (CNN)-based deep learning inference using a common API.
   * Speed development using optimized OpenCV* and OpenVX* functions.
 * **ros OpenVINO Runtime Framework** is the main body of this repo. it provides key logic implementation for pipeline lifecycle management, resource management and ROS system adapter, which extends Intel OpenVINO toolkit and libraries. Furthermore, this runtime framework provides ways to ease launching, configuration and data analytics and re-use.
-* **Diversal Input resources** are the data resources to be infered and analyzed with the OpenVINO framework.
-* **ROS interfaces and outputs** currently include _Topic_ and _service_. Natively, RViz output and CV image window output are also supported by refactoring topic message and inferrence results.
-* **Optimized Models** provides by Model Optimizer component of Intel® OpenVINO™ toolkit. Imports trained models from various frameworks (Caffe*, Tensorflow*, MxNet*, ONNX*, Kaldi*) and converts them to a unified intermediate representation file. It also optimizes topologies through node merging, horizontal fusion, eliminating batch normalization, and quantization.It also supports graph freeze and graph summarize along with dynamic input freezing.
+* **Diversal Input resources** are the data resources to be inferred and analyzed with the OpenVINO framework.
+* **ROS interfaces and outputs** currently include _Topic_ and _service_. Natively, RViz output and CV image window output are also supported by refactoring topic message and inference results.
+* **Optimized Models** provides by Model Optimizer component of Intel® OpenVINO™ toolkit. Imports trained models from various frameworks (Caffe*, TensorFlow*, MxNet*, ONNX*, Kaldi*) and converts them to a unified intermediate representation file. It also optimizes topologies through node merging, horizontal fusion, eliminating batch normalization, and quantization.It also supports graph freeze and graph summarize along with dynamic input freezing.
 
 ## Logic Flow
 
@@ -30,7 +30,7 @@ From the view of logic implementation, the package introduces the definitions of
 
 ![Logic_Flow](https://github.com/intel/ros_openvino_toolkit/blob/master/data/images/impletation_logic.PNG "OpenVINO RunTime Logic Flow")
 
-Once a corresponding program is launched with a specified .yaml config file passed in the .launch file or via commandline, _**parameter manager**_ analyzes the configurations about pipeline and the whole framework, then shares the parsed configuration information with pipeline procedure. A _**pipeline instance**_ is created by following the configuration info and is added into _**pipeline manager**_ for lifecycle control and inference action triggering.
+Once a corresponding program is launched with a specified .yaml config file passed in the .launch file or via commandline, _**parameter manager**_ analyzes the configurations about pipeline and the whole framework, then shares the parsed configuration information with pipeline procedure. A _**pipeline instance**_ is created by following the configuration info and is added into _**pipeline manager**_ for life cycle control and inference action triggering.
 
 The contents in **.yaml config file** should be well structured and follow the supported rules and entity names. Please see [the configuration guidance](https://github.com/intel/ros_openvino_toolkit/blob/master/doc/YAML_CONFIGURATION_GUIDE.md) for how to create or edit the config files.
 
@@ -60,13 +60,13 @@ Currently, the inference feature list is supported:
 |-----------------------|------------------------------------------------------------------|
 |Face Detection|Object Detection task applied to face recognition using a sequence of neural networks.|
 |Emotion Recognition| Emotion recognition based on detected face image.|
-|Age & Gender Recognition| Age and gener recognition based on detected face image.|
+|Age & Gender Recognition| Age and gender recognition based on detected face image.|
 |Head Pose Estimation| Head pose estimation based on detected face image.|
 |Object Detection| object detection based on SSD-based trained models.|
 |Vehicle Detection| Vehicle and passenger detection based on Intel models.|
 |Object Segmentation| object detection and segmentation.|
 |Person Reidentification| Person Reidentification based on object detection.|
-|Human Pose Estimation| Estimate the poses (skeletons) of people. |
+|Human Pose Estimation| Estimate human poses comprised of 18 joints. |
 
 ## ROS interfaces and outputs
 
@@ -75,62 +75,62 @@ Currently, the inference feature list is supported:
 #### Subscribed Topic
 
 * Image topic:
-```/camera/color/image_raw```([sensor_msgs::Image](http://docs.ros.org/melodic/api/sensor_msgs/html/msg/Image.html))
+`/camera/color/image_raw` ([sensor_msgs::Image](http://docs.ros.org/melodic/api/sensor_msgs/html/msg/Image.html))
 
 #### Published Topic
 
 * Face Detection:
-```/ros_openvino_toolkit/face_detection```([object_msgs::ObjectsInBoxes](https://github.com/intel/object_msgs/blob/master/msg/ObjectsInBoxes.msg))
+`/ros_openvino_toolkit/face_detection` ([object_msgs::ObjectsInBoxes](https://github.com/intel/object_msgs/blob/master/msg/ObjectsInBoxes.msg))
 
 * Emotion Recognition:
-```/ros_openvino_toolkit/emotions_recognition```([vino_people_msgs::EmotionsStamped](https://github.com/intel/ros_openvino_toolkit/blob/master/vino_people_msgs/msg/EmotionsStamped.msg))
+`/ros_openvino_toolkit/emotions_recognition` ([vino_people_msgs::EmotionsStamped](https://github.com/intel/ros_openvino_toolkit/blob/master/vino_people_msgs/msg/EmotionsStamped.msg))
 
 * Age and Gender Recognition:
-```/ros_openvino_toolkit/age_genders_Recognition```([vino_people_msgs::AgeGenderStamped](https://github.com/intel/ros_openvino_toolkit/blob/master/vino_people_msgs/msg/AgeGenderStamped.msg))
+`/ros_openvino_toolkit/age_genders_Recognition` ([vino_people_msgs::AgeGenderStamped](https://github.com/intel/ros_openvino_toolkit/blob/master/vino_people_msgs/msg/AgeGenderStamped.msg))
 
 * Head Pose Estimation:
-```/ros_openvino_toolkit/headposes_estimation```([vino_people_msgs::HeadPoseStamped](https://github.com/intel/ros_openvino_toolkit/blob/master/vino_people_msgs/msg/HeadPoseStamped.msg))
+`/ros_openvino_toolkit/headposes_estimation` ([vino_people_msgs::HeadPoseStamped](https://github.com/intel/ros_openvino_toolkit/blob/master/vino_people_msgs/msg/HeadPoseStamped.msg))
 
 * Object Detection:
-```/ros_openvino_toolkit/detected_objects```([object_msgs::ObjectsInBoxes](https://github.com/intel/object_msgs/blob/master/msg/ObjectsInBoxes.msg))
+`/ros_openvino_toolkit/detected_objects` ([object_msgs::ObjectsInBoxes](https://github.com/intel/object_msgs/blob/master/msg/ObjectsInBoxes.msg))
 
 * Object Segmentation:
-```/ros_openvino_toolkit/segmented_obejcts```([vino_people_msgs::ObjectsInMasks](https://github.com/intel/ros_openvino_toolkit/blob/devel/vino_people_msgs/msg/ObjectsInMasks.msg))
+`/ros_openvino_toolkit/segmented_obejcts` ([vino_people_msgs::ObjectsInMasks](https://github.com/intel/ros_openvino_toolkit/blob/devel/vino_people_msgs/msg/ObjectsInMasks.msg))
 
 * Person Reidentification:
-```/ros_openvino_toolkit/reidentified_persons```([vino_people_msgs::ReidentificationStamped](https://github.com/intel/ros_openvino_toolkit/blob/devel/vino_people_msgs/msg/ReidentificationStamped.msg))
+`/ros_openvino_toolkit/reidentified_persons` ([vino_people_msgs::ReidentificationStamped](https://github.com/intel/ros_openvino_toolkit/blob/devel/vino_people_msgs/msg/ReidentificationStamped.msg))
 
 * Human Pose Estimation:
-```/ros_openvino_toolkit/human_pose_estimation```([vino_people_msgs::HumanPoseStamped](https://github.com/3SpheresRoboticsProject/ros_openvino_toolkit/blob/add_stamp/vino_people_msgs/msg/HumanPoseStamped.msg)
+`/ros_openvino_toolkit/human_pose_estimation` ([vino_people_msgs::HumanPoseStamped](https://github.com/3SpheresRoboticsProject/ros_openvino_toolkit/blob/add_stamp/vino_people_msgs/msg/HumanPoseStamped.msg) (also check [vino_people_msgs::HumanPose](https://github.com/3SpheresRoboticsProject/ros_openvino_toolkit/blob/add_stamp/vino_people_msgs/msg/HumanPose.msg) for the list of joints)
 
 * Rviz Output:
-```/ros_openvino_toolkit/image_rviz```([sensor_msgs::Image](http://docs.ros.org/melodic/api/sensor_msgs/html/msg/Image.html))
+`/ros_openvino_toolkit/image_rviz` ([sensor_msgs::Image](http://docs.ros.org/melodic/api/sensor_msgs/html/msg/Image.html))
 
 ### Service
 
 * Object Detection Service:
-```/detect_object``` ([object_msgs::DetectObject](https://github.com/intel/object_msgs/blob/master/srv/DetectObject.srv))
+`/detect_object` ([object_msgs::DetectObject](https://github.com/intel/object_msgs/blob/master/srv/DetectObject.srv))
 
 * Face Detection Service:
-```/detect_face``` ([object_msgs::DetectObject](https://github.com/intel/object_msgs/blob/master/srv/DetectObject.srv))
+`/detect_face` ([object_msgs::DetectObject](https://github.com/intel/object_msgs/blob/master/srv/DetectObject.srv))
 
 * Age & Gender Detection Service:
-```/detect_age_gender``` ([vino_people_msgs::AgeGender](https://github.com/intel/ros_openvino_toolkit/blob/master/vino_people_msgs/srv/AgeGenderSrv.srv))
+`/detect_age_gender` ([vino_people_msgs::AgeGender](https://github.com/intel/ros_openvino_toolkit/blob/master/vino_people_msgs/srv/AgeGenderSrv.srv))
 
 * Headpose Detection Service:
-```/detect_head_pose``` ([vino_people_msgs::HeadPose](https://github.com/intel/ros_openvino_toolkit/blob/master/vino_people_msgs/srv/HeadPoseSrv.srv))
+`/detect_head_pose` ([vino_people_msgs::HeadPose](https://github.com/intel/ros_openvino_toolkit/blob/master/vino_people_msgs/srv/HeadPoseSrv.srv))
 
 * Emotion Detection Service:
-```/detect_emotion``` ([vino_people_msgs::Emotion](https://github.com/intel/ros_openvino_toolkit/blob/master/vino_people_msgs/srv/EmotionSrv.srv))
+`/detect_emotion` ([vino_people_msgs::Emotion](https://github.com/intel/ros_openvino_toolkit/blob/master/vino_people_msgs/srv/EmotionSrv.srv))
 
 * Human Pose Estimation Service:
-```/human_pose_estimation```([vino_people_msgs::HumanPose](https://github.com/3SpheresRoboticsProject/ros_openvino_toolkit/blob/add_stamp/vino_people_msgs/srv/HumanPoseSrv.srv)
+`/human_pose_estimation` ([vino_people_msgs::HumanPose](https://github.com/3SpheresRoboticsProject/ros_openvino_toolkit/blob/add_stamp/vino_people_msgs/srv/HumanPoseSrv.srv)
 
 ### RViz
 
 RViz dispaly is also supported by the composited topic of original image frame with inference result.
 To show in RViz tool, add an image marker with the composited topic:
-```/ros_openvino_toolkit/image_rviz```([sensor_msgs::Image](http://docs.ros.org/melodic/api/sensor_msgs/html/msg/Image.html))
+`/ros_openvino_toolkit/image_rviz` ([sensor_msgs::Image](http://docs.ros.org/melodic/api/sensor_msgs/html/msg/Image.html))
 
 ### Image Window
 
@@ -202,7 +202,7 @@ See below pictures for the demo result snapshots.
       ```
 
 2. Configure the environment (you can write the configuration to your ~/.basrch file)</br>
-    **Note**: If you used root privileges to install the OpenVINO binary package, it installs the Intel Distribution of OpenVINO toolkit in this directory: */opt/intel/openvino_<version>/*
+    **Note**: If you used root privileges to install the OpenVINO binary package, it installs the Intel Distribution of OpenVINO toolkit in this directory: */opt/intel/openvino_&lt;version&gt;/*
 
     ```bash
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/intel/computer_vision_sdk/deployment_tools/inference_engine/samples/build/intel64/Release/lib
@@ -239,7 +239,7 @@ One-step installation scripts are provided for the dependencies' installation. P
     sudo python3 /opt/openvino_toolkit/dldt/model-optimizer/mo.py --input_model /opt/openvino_toolkit/open_model_zoo/model_downloader/object_detection/common/mobilenet-ssd/caffe/mobilenet-ssd.caffemodel --output_dir /opt/openvino_toolkit/open_model_zoo/model_downloader/object_detection/common/mobilenet-ssd/caffe/output/FP16 --data_type=FP16 --mean_values [127.5,127.5,127.5] --scale_values [127.5]
     ```
 
-  * download the optimized Intermediate Representation (IR) of model (excute _once_)<br>
+  * download the optimized Intermediate Representation (IR) of model (execute _once_)<br>
 
     ```bash
     cd /opt/openvino_toolkit/open_model_zoo/model_downloader
@@ -358,7 +358,7 @@ One-step installation scripts are provided for the dependencies' installation. P
 
 * Support **result filtering** for inference process, so that the inference results can be filtered to different subsidiary inference. For example, given an image, firstly we do Object Detection on it, secondly we pass cars to vehicle brand recognition and pass license plate to license number recognition.
 * Design **resource manager** to better use such resources as models, engines, and other external plugins.
-* Develop GUI based **configuration and management tools** (and monitoring and diagnose tools), in order to provide easy entry for end users to simplify their operation. 
+* Develop GUI based **configuration and management tools** (and monitoring and diagnose tools), in order to provide easy entry for end users to simplify their operation.
 
 # More Information
 

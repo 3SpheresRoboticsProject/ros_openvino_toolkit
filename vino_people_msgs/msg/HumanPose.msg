@@ -16,6 +16,7 @@
 # https://docs.openvinotoolkit.org/2019_R3.1/_models_intel_human_pose_estimation_0001_description_human_pose_estimation_0001.html,
 # provides the location of 18 joints, which are stored in the vector 
 # `keypoints`. The keypoints are:
+#
 # | Index | Keypoint Name  |
 # | ----- | -------------- |
 # |   0   | nose           |
