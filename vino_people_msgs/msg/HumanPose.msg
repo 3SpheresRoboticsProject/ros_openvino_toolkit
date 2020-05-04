@@ -12,32 +12,30 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# The model human-pose-estimation-0001, available at:
-# https://docs.openvinotoolkit.org/2019_R3.1/_models_intel_human_pose_estimation_0001_description_human_pose_estimation_0001.html,
-# provides the location of 18 joints, which are stored in the vector 
-# `keypoints`. The keypoints are:
-#
-# | Index | Keypoint Name  |
-# | ----- | -------------- |
-# |   0   | nose           |
-# |   1   | neck           |
-# |   2   | right shoulder |
-# |   3   | right elbow    |
-# |   4   | right wrist    |
-# |   5   | left shoulder  |
-# |   6   | left elbow     |
-# |   7   | left wrist     |
-# |   8   | right hip      |
-# |   9   | right knee     |
-# |  10   | right ankle    |
-# |  11   | left hip       |
-# |  12   | left knee      |
-# |  13   | left ankle     |
-# |  14   | right eye      |
-# |  15   | left eye       |
-# |  16   | right ear      |
-# |  17   | left ear       |
-vino_people_msgs/HumanPoseKeypoint[] keypoints
+vino_people_msgs/HumanPoseKeypoint[] keypoints # vector with the keypoints.
 
 float32 score                       # score
 sensor_msgs/RegionOfInterest roi 	# region of interest for a person's body
+
+# The model human-pose-estimation-0001, available at:
+# https://docs.openvinotoolkit.org/2019_R3.1/_models_intel_human_pose_estimation_0001_description_human_pose_estimation_0001.html,
+# provides the location of 18 joints, which are stored in the vector 
+# `keypoints`. The keypoints are given by the following constants:
+uint8 NOSE = 0
+uint8 NECK = 1
+uint8 RIGHT_SHOULDER = 2
+uint8 RIGHT_ELBOW = 3
+uint8 RIGHT_WRIST = 4
+uint8 LEFT_SHOULDER = 5
+uint8 LEFT_ELBOW = 6
+uint8 LEFT_WRIST = 7
+uint8 RIGHT_HIP = 8
+uint8 RIGHT_KNEE = 9
+uint8 RIGHT_ANKLE = 10
+uint8 LEFT_HIP = 11
+uint8 LEFT_KNEE = 12
+uint8 LEFT_ANKLE = 13
+uint8 RIGHT_EYE = 14
+uint8 LEFT_EYE = 15
+uint8 RIGHT_EAR = 16
+uint8 LEFT_EAR = 17
