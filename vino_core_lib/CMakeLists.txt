@@ -41,6 +41,7 @@ find_package(
   core
   highgui
   imgproc
+  videoio
 )
 
 catkin_package(
